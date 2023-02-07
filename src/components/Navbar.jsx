@@ -4,14 +4,10 @@ import { FiSmile } from 'react-icons/fi';
 import {login, logout, onUserStateChange} from '../api/firebase'
 import User from './User';
 import Button from './ui/Button';
+import { useAuthContext } from 'pages/context/AuthContext';
 
 function Navbar() {
-  const [user, setUser] = useState();
-
-
-  useEffect(() => {
-    onUserStateChange(setUser);
-  }, [])
+  const { user, login, logout } = useAuthContext();
 
 
   return (

@@ -14,19 +14,20 @@ const provider = new GoogleAuthProvider();
 
 export function login(){
   signInWithPopup(auth, provider)
-  .then((result) => {
-    const user = result.user;
-    console.log(user);
-  }).catch(console.error);
+  .catch(console.error);
 }
 export function logout(){
-  signOut(auth).then(() => null);
+  signOut(auth).catch(console.error);
 }
 
 export function onUserStateChange(callback){
   onAuthStateChanged(auth, (user) => {
     callback(user);
   })
+}
+
+export function adminUser(user){
+  
 }
 // Cart userId에 있는 cart 불어오기
 // export async function getCart(userId){

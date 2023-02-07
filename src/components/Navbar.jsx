@@ -2,24 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FiSmile } from 'react-icons/fi';
 import {login, logout, onUserStateChange} from '../api/firebase'
+import User from './User';
+import Button from './ui/Button';
 
 function Navbar() {
   const [user, setUser] = useState();
 
-  const handleLogin = () => {
-    login().then(setUser);
-  } 
-  const handleLogout = () => {
-    logout().then(setUser);
-  } 
 
   useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    })
+    onUserStateChange(setUser);
   }, [])
-
 
 
   return (
@@ -31,9 +23,9 @@ function Navbar() {
       <nav class='flex items-center gap-4 font-semibold text-2xl'>
         <Link to='/cart'>Cart</Link>
         <Link  to='/product/new'>New</Link>
-        {/* <button >Login</button> */}
-        { !user && <button onClick={handleLogin}>Login</button>}
-        { user && <button onClick={handleLogout}>Logout</button>}
+        { !user && <Button text={'login'} onClick={login} />}
+        { user && <Button text={'logout'} onClick={logout} />}
+        { user && <User user={user}/>}
         
 
       </nav>
